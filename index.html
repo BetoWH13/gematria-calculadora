@@ -16,27 +16,27 @@
     .disclaimer { font-size: 0.9em; color: #666; margin-top: 2rem; }
     .mode-selector { margin-bottom: 1rem; }
   </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Calculadora de Guematría Hebrea",
-  "url": "https://betowh13.github.io/gematria-calculadora",
-  "description": "Calculadora en línea para obtener el valor guemátrico de nombres y palabras en hebreo a partir de letras latinas o entrada directa en hebreo.",
-  "applicationCategory": "EducationApplication",
-  "operatingSystem": "All",
-  "inLanguage": "es",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "TuNombre"
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculadora de Guematría Hebrea",
+    "url": "https://betowh13.github.io/gematria-calculadora",
+    "description": "Calculadora en línea para obtener el valor guemátrico de nombres y palabras en hebreo a partir de letras latinas o entrada directa en hebreo.",
+    "applicationCategory": "EducationApplication",
+    "operatingSystem": "All",
+    "inLanguage": "es",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "TuNombre"
+    }
   }
-}
-</script>
+  </script>
 </head>
 <body>
   <h1>Calculadora de Guematría Hebrea</h1>
@@ -57,11 +57,12 @@
     <tbody id="resultado-desglose"></tbody>
   </table>
 
-<div class="cta-books" style="margin-top: 1.5rem; font-size: 0.95rem; color: #333;">
-  📚 <strong>¿Te interesa aprender más?</strong><br>
-  Explora <a href="https://www.amazon.com/s?k=libro+de+gematria+hebrea&crid=10WACIXY2R1UD&sprefix=libros+de+gematria%2Caps%2C218&linkCode=ll2&tag=emunabitajon4-20&linkId=23a5201795d52e17fb58e137f6421079&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">libros sobre Guematría Hebrea en Amazon</a> con nuestra recomendación.</div>
+  <div class="cta-books" style="margin-top: 1.5rem; font-size: 0.95rem; color: #333;">
+    📚 <strong>¿Te interesa aprender más?</strong><br>
+    Explora <a href="https://www.amazon.com/s?k=libro+de+gematria+hebrea&crid=10WACIXY2R1UD&sprefix=libros+de+gematria%2Caps%2C218&linkCode=ll2&tag=emunabitajon4-20&linkId=23a5201795d52e17fb58e137f6421079&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">libros sobre Guematría Hebrea en Amazon</a> con nuestra recomendación.
+  </div>
 
-<div id="significado-nombre" style="margin-top: 1rem; font-style: italic;"></div>
+  <div id="significado-nombre" style="margin-top: 1rem; font-style: italic;"></div>
 
   <div class="disclaimer">
     🕊️ <strong>Nota:</strong> Esta herramienta tiene fines informativos y educativos. No pretende ofrecer interpretaciones religiosas, espirituales ni predictivas. Las coincidencias numéricas pueden variar según el sistema utilizado y no deben considerarse como verdades absolutas. Invitamos a cada usuario a reflexionar de forma personal y respetuosa.
@@ -88,8 +89,6 @@
       'ר': 200, 'ש': 300, 'ת': 400
     };
 
-
-
     let modo = 'latin';
 
     function cambiarModo(nuevoModo) {
@@ -103,77 +102,64 @@
       return str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
     }
 
-  async function transliterateToHebrew(input) {
-  const normalized = normalizeInput(input);
+    async function transliterateToHebrew(input) {
+      const normalized = normalizeInput(input);
 
-  try {
-    const response = await fetch(`/.netlify/functions/transliterate?name=${encodeURIComponent(normalized)}`);
-    const data = await response.json();
+      try {
+        const response = await fetch(`/.netlify/functions/transliterate?name=${encodeURIComponent(normalized)}`);
+        const data = await response.json();
 
-    if (data.hebrew) {
-      return data.hebrew;
+        if (data.hebrew) {
+          return data.hebrew;
+        }
+      } catch (error) {
+        console.error('Error calling transliterate API:', error);
+      }
+
+      // Fallback to local transliteration logic
+      let output = '';
+      let i = 0;
+
+      while (i < normalized.length) {
+        const two = normalized.slice(i, i + 2);
+        const one = normalized[i];
+
+        if (multiLetterMap[two]) {
+          output += multiLetterMap[two];
+          i += 2;
+        } else if (singleLetterMap[one]) {
+          output += singleLetterMap[one];
+          i += 1;
+        } else {
+          i += 1;
+        }
+      }
+
+      return output;
     }
-  } catch (error) {
-    console.error('Error calling transliterate API:', error);
-  }
 
-  // Fallback to local transliteration logic
-  let output = '';
-  let i = 0;
+    async function calcularGematria(input) {
+      const hebrewText = modo === 'hebreo' ? input.trim() : await transliterateToHebrew(input);
+      let total = 0;
+      const desglose = [];
 
-  while (i < normalized.length) {
-    const two = normalized.slice(i, i + 2);
-    const one = normalized[i];
+      for (const letra of hebrewText) {
+        const valor = hebrewGematriaMap[letra];
+        if (valor) {
+          desglose.push({ letra, valor });
+          total += valor;
+        }
+      }
 
-    if (multiLetterMap[two]) {
-      output += multiLetterMap[two];
-      i += 2;
-    } else if (singleLetterMap[one]) {
-      output += singleLetterMap[one];
-      i += 1;
-    } else {
-      i += 1;
+      return { hebrewText, total, desglose };
     }
-  }
 
-  return output;
-}
+    async function mostrarResultado() {
+      const input = document.getElementById('entrada').value;
+      document.getElementById('significado-nombre')?.remove();
+      const resultado = await calcularGematria(input);
 
-   async function calcularGematria(input) {
-  const hebrewText = modo === 'hebreo' ? input.trim() : await transliterateToHebrew(input);
-  let total = 0;
-  const desglose = [];
-
-  for (const letra of hebrewText) {
-    const valor = hebrewGematriaMap[letra];
-    if (valor) {
-      desglose.push({ letra, valor });
-      total += valor;
-    }
-  }
-
-  return { hebrewText, total, desglose };
-}
-
-
-   async function mostrarResultado() {
-  const input = document.getElementById('entrada').value;
-  document.getElementById('significado-nombre')?.remove();
-  const resultado = await calcularGematria(input);
-
-  document.getElementById('resultado-hebreo').innerHTML = `Palabra en hebreo: <span dir="rtl">${resultado.hebrewText}</span>`;
-  document.getElementById('resultado-total').textContent = `Valor Total: ${resultado.total}`;
-
-  const desgloseElemento = document.getElementById('resultado-desglose');
-  desgloseElemento.innerHTML = '';
-  resultado.desglose.forEach(item => {
-    const fila = document.createElement('tr');
-    fila.innerHTML = `<td>${item.letra}</td><td>${item.valor}</td>`;
-    desgloseElemento.appendChild(fila);
-  });
-}
-
-}</span>`;
+      document.getElementById('resultado-hebreo').innerHTML = `Palabra en hebreo: <span dir="rtl">${resultado.hebrewText}</span>`;
       document.getElementById('resultado-total').textContent = `Valor Total: ${resultado.total}`;
 
       const desgloseElemento = document.getElementById('resultado-desglose');
@@ -184,12 +170,13 @@
         desgloseElemento.appendChild(fila);
       });
     }
-  function mostrarSignificado(significado) {
-  const significadoDiv = document.createElement('div');
-  significadoDiv.id = 'significado-nombre';
-  significadoDiv.textContent = `📝 Significado: ${significado}`;
-  document.body.appendChild(significadoDiv);
-}
-</script>
+
+    function mostrarSignificado(significado) {
+      const significadoDiv = document.createElement('div');
+      significadoDiv.id = 'significado-nombre';
+      significadoDiv.textContent = `📝 Significado: ${significado}`;
+      document.body.appendChild(significadoDiv);
+    }
+  </script>
 </body>
 </html>
