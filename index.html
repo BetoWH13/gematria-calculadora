@@ -139,21 +139,22 @@
   return output;
 }
 
-    function calcularGematria(input) {
-      const hebrewText = modo === 'hebreo' ? input.trim() : transliterateToHebrew(input);
-      let total = 0;
-      const desglose = [];
+   async function calcularGematria(input) {
+  const hebrewText = modo === 'hebreo' ? input.trim() : await transliterateToHebrew(input);
+  let total = 0;
+  const desglose = [];
 
-      for (const letra of hebrewText) {
-        const valor = hebrewGematriaMap[letra];
-        if (valor) {
-          desglose.push({ letra, valor });
-          total += valor;
-        }
-      }
-
-      return { hebrewText, total, desglose };
+  for (const letra of hebrewText) {
+    const valor = hebrewGematriaMap[letra];
+    if (valor) {
+      desglose.push({ letra, valor });
+      total += valor;
     }
+  }
+
+  return { hebrewText, total, desglose };
+}
+
 
     function mostrarResultado() {
   const input = document.getElementById('entrada').value;
