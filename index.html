@@ -1,87 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="google-site-verification" content="1ytLN5TyzaIYiHSoRW37KUsCTjcnhzGVUOHWa2CWZco" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Guematría Hebrea - Nombres y Palabras en Hebreo</title>
-  <meta name="description" content="Calcula el valor guemátrico de nombres y palabras usando el alfabeto hebreo. Transliteración automática desde letras latinas o entrada directa en hebreo.">
-  <meta name="keywords" content="gematria hebrea, calculadora guematria, valor hebreo nombres, numerología hebrea, guematria nombres hebreos">
-  <meta name="author" content="TuNombre o Proyecto">
+  <title>Calculadora de Guematría Hebrea</title>
   <style>
     body { font-family: sans-serif; max-width: 700px; margin: 2rem auto; padding: 1rem; line-height: 1.6; background: #f9f9f9; }
-    input, button, select { font-size: 1rem; padding: 0.5rem; margin: 0.5rem 0; }
+    input, button, select { font-size: 1rem; padding: 0.5rem; margin: 0.5rem 0; width: 100%; }
     table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
     th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: center; }
     .disclaimer { font-size: 0.9em; color: #666; margin-top: 2rem; }
-    .mode-selector { margin-bottom: 1rem; }
+    .suggestions { background: white; border: 1px solid #ccc; max-height: 120px; overflow-y: auto; position: absolute; z-index: 999; width: 100%; }
+    .suggestion-item { padding: 0.5rem; cursor: pointer; }
+    .suggestion-item:hover { background: #eee; }
+    .meaning-box { background: #fff8dc; padding: 1rem; margin-top: 1rem; border-left: 4px solid #f0ad4e; }
+    .source-label { font-size: 0.85em; color: #555; margin-top: 0.5rem; font-style: italic; }
   </style>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Calculadora de Guematría Hebrea",
-    "url": "https://betowh13.github.io/gematria-calculadora",
-    "description": "Calculadora en línea para obtener el valor guemátrico de nombres y palabras en hebreo a partir de letras latinas o entrada directa en hebreo.",
-    "applicationCategory": "EducationApplication",
-    "operatingSystem": "All",
-    "inLanguage": "es",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "author": {
-      "@type": "Person",
-      "name": "TuNombre"
-    }
-  }
-  </script>
 </head>
 <body>
   <h1>Calculadora de Guematría Hebrea</h1>
 
-  <div class="mode-selector">
-    <label><input type="radio" name="modo" value="latin" checked onchange="cambiarModo('latin')"> Entrada en letras latinas</label>
-    <label><input type="radio" name="modo" value="hebreo" onchange="cambiarModo('hebreo')"> Entrada en hebreo</label>
-  </div>
-
-  <input type="text" id="entrada" placeholder="shalom">
+  <input type="text" id="entrada" placeholder="Escribe un nombre hebreo" oninput="mostrarSugerencias()" autocomplete="off">
+  <div id="sugerencias" class="suggestions"></div>
   <button onclick="mostrarResultado()">Calcular</button>
 
   <h2 id="resultado-hebreo">Palabra en hebreo: —</h2>
   <h2 id="resultado-total">Valor Total: —</h2>
+  <div id="significado-box" class="meaning-box" style="display:none;"></div>
+  <div id="source-label" class="source-label"></div>
 
   <table>
     <thead><tr><th>Letra</th><th>Valor</th></tr></thead>
     <tbody id="resultado-desglose"></tbody>
   </table>
 
-  <div class="cta-books" style="margin-top: 1.5rem; font-size: 0.95rem; color: #333;">
-    📚 <strong>¿Te interesa aprender más?</strong><br>
-    Explora <a href="https://www.amazon.com/s?k=libro+de+gematria+hebrea&crid=10WACIXY2R1UD&sprefix=libros+de+gematria%2Caps%2C218&linkCode=ll2&tag=emunabitajon4-20&linkId=23a5201795d52e17fb58e137f6421079&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">libros sobre Guematría Hebrea en Amazon</a> con nuestra recomendación.
-  </div>
-
-  <div id="significado-nombre" style="margin-top: 1rem; font-style: italic;"></div>
-
-  <div class="disclaimer">
-    🕊️ <strong>Nota:</strong> Esta herramienta tiene fines informativos y educativos. No pretende ofrecer interpretaciones religiosas, espirituales ni predictivas. Las coincidencias numéricas pueden variar según el sistema utilizado y no deben considerarse como verdades absolutas. Invitamos a cada usuario a reflexionar de forma personal y respetuosa.
-  </div>
-
   <script>
-    const multiLetterMap = {
-      'tz': 'צ', 'sh': 'ש', 'kh': 'ח', 'ch': 'ח', 'th': 'ת',
-      'ph': 'פ', 'aa': 'א', 'oo': 'ו', 'ei': 'ע', 'ai': 'ע', 'ou': 'ו'
-    };
-
-    const singleLetterMap = {
-      'a': 'א', 'b': 'ב', 'c': 'ק', 'd': 'ד', 'e': 'ע', 'f': 'פ',
-      'g': 'ג', 'h': 'ה', 'i': 'י', 'j': 'י', 'k': 'כ', 'l': 'ל',
-      'm': 'מ', 'n': 'נ', 'o': 'ו', 'p': 'פ', 'q': 'ק', 'r': 'ר',
-      's': 'ס', 't': 'ת', 'u': 'ו', 'v': 'ב', 'w': 'ו', 'x': 'קס',
-      'y': 'י', 'z': 'ז'
-    };
-
     const hebrewGematriaMap = {
       'א': 1, 'ב': 2, 'ג': 3, 'ד': 4, 'ה': 5, 'ו': 6, 'ז': 7, 'ח': 8, 'ט': 9,
       'י': 10, 'כ': 20, 'ך': 20, 'ל': 30, 'מ': 40, 'ם': 40, 'נ': 50, 'ן': 50,
@@ -89,94 +42,78 @@
       'ר': 200, 'ש': 300, 'ת': 400
     };
 
-    let modo = 'latin';
+    async function mostrarResultado() {
+      const input = document.getElementById('entrada').value.trim();
+      if (!input) return;
+      const res = await fetch(`/.netlify/functions/transliterate?name=${encodeURIComponent(input)}`);
+      const data = await res.json();
 
-    function cambiarModo(nuevoModo) {
-      modo = nuevoModo;
-      const entrada = document.getElementById('entrada');
-      entrada.value = '';
-      entrada.placeholder = modo === 'latin' ? 'ej: gabriel, sara' : 'ej: גבריאל, שרה';
-    }
-
-    function normalizeInput(str) {
-      return str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
-    }
-
-    async function transliterateToHebrew(input) {
-      const normalized = normalizeInput(input);
-
-      try {
-        const response = await fetch(`/.netlify/functions/transliterate?name=${encodeURIComponent(normalized)}`);
-        const data = await response.json();
-
-        if (data.hebrew) {
-          return data.hebrew;
-        }
-      } catch (error) {
-        console.error('Error calling transliterate API:', error);
-      }
-
-      // Fallback to local transliteration logic
-      let output = '';
-      let i = 0;
-
-      while (i < normalized.length) {
-        const two = normalized.slice(i, i + 2);
-        const one = normalized[i];
-
-        if (multiLetterMap[two]) {
-          output += multiLetterMap[two];
-          i += 2;
-        } else if (singleLetterMap[one]) {
-          output += singleLetterMap[one];
-          i += 1;
-        } else {
-          i += 1;
-        }
-      }
-
-      return output;
-    }
-
-    async function calcularGematria(input) {
-      const hebrewText = modo === 'hebreo' ? input.trim() : await transliterateToHebrew(input);
+      const hebreo = data.hebrew || '(no encontrado)';
+      const letras = hebreo.split('');
       let total = 0;
       const desglose = [];
 
-      for (const letra of hebrewText) {
+      letras.forEach(letra => {
         const valor = hebrewGematriaMap[letra];
         if (valor) {
           desglose.push({ letra, valor });
           total += valor;
         }
-      }
+      });
 
-      return { hebrewText, total, desglose };
-    }
+      document.getElementById('resultado-hebreo').innerHTML = `Palabra en hebreo: <span dir="rtl">${hebreo}</span>`;
+      document.getElementById('resultado-total').textContent = `Valor Total: ${total}`;
 
-    async function mostrarResultado() {
-      const input = document.getElementById('entrada').value;
-      document.getElementById('significado-nombre')?.remove();
-      const resultado = await calcularGematria(input);
-
-      document.getElementById('resultado-hebreo').innerHTML = `Palabra en hebreo: <span dir="rtl">${resultado.hebrewText}</span>`;
-      document.getElementById('resultado-total').textContent = `Valor Total: ${resultado.total}`;
-
-      const desgloseElemento = document.getElementById('resultado-desglose');
-      desgloseElemento.innerHTML = '';
-      resultado.desglose.forEach(item => {
+      const tbody = document.getElementById('resultado-desglose');
+      tbody.innerHTML = '';
+      desglose.forEach(item => {
         const fila = document.createElement('tr');
         fila.innerHTML = `<td>${item.letra}</td><td>${item.valor}</td>`;
-        desgloseElemento.appendChild(fila);
+        tbody.appendChild(fila);
+      });
+
+      const significado = data.meaning || null;
+      const source = data.source || 'transliterado';
+
+      document.getElementById('significado-box').style.display = significado ? 'block' : 'none';
+      document.getElementById('significado-box').innerHTML = significado ? `✍️ <strong>Significado:</strong> ${significado}` : '';
+      document.getElementById('source-label').innerText = source === 'curated' ? '✅ Fuente: Nombre curado' : '🌀 Fuente: Transliteración automática';
+    }
+
+    function mostrarSugerencias() {
+      const val = document.getElementById('entrada').value.trim().toLowerCase();
+      const sugDiv = document.getElementById('sugerencias');
+      sugDiv.innerHTML = '';
+      if (!val) return;
+
+      const nombres = [
+        "abraham","sarah","isaac","jacob","moses","aaron","joseph","david","solomon","ruth","esther","miriam","levi","benjamin","daniel","elijah","jonah","noah","samuel","nathan","rebecca","raquel","isaiah","jeremiah","ezekiel","job","shira","yael","tamar","lior","noa","eden","ilan","ori","ron","neta","amir","ziv","tal","zipporah","boaz","dinah","matan","erez","ofir","gal","talia","meir","hila","adiel","aviv","gavriel","yaakov","tzvi","shlomo","chava","naomi","eliezer","yosef","dan","asher"
+      ];
+
+      const resultados = nombres.filter(n => n.startsWith(val)).slice(0, 6);
+      resultados.forEach(nombre => {
+        const item = document.createElement('div');
+        item.className = 'suggestion-item';
+        item.textContent = nombre;
+        item.onclick = () => {
+          document.getElementById('entrada').value = nombre;
+          sugDiv.innerHTML = '';
+          mostrarResultado();
+        };
+        sugDiv.appendChild(item);
       });
     }
 
-    function mostrarSignificado(significado) {
-      const significadoDiv = document.createElement('div');
-      significadoDiv.id = 'significado-nombre';
-      significadoDiv.textContent = `📝 Significado: ${significado}`;
-      document.body.appendChild(significadoDiv);
-    }
+    document.getElementById('entrada').addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        mostrarResultado();
+        document.getElementById('sugerencias').innerHTML = '';
+      }
+    });
   </script>
+
+  <div class="disclaimer">
+    🕊️ Esta herramienta tiene fines educativos. No sustituye consejo espiritual ni pretende hacer interpretaciones religiosas. Consulta fuentes confiables.
+  </div>
 </body>
 </html>
