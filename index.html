@@ -103,33 +103,41 @@
       return str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
     }
 
-    function transliterateToHebrew(input) {
-      const normalized = normalizeInput(input);
-      if (curatedNames[normalized]) {
-  mostrarSignificado(curatedNames[normalized][1]);
-  return curatedNames[normalized][0];
-}
+  async function transliterateToHebrew(input) {
+  const normalized = normalizeInput(input);
 
-      let output = '';
-      let i = 0;
+  try {
+    const response = await fetch(`/.netlify/functions/transliterate?name=${encodeURIComponent(normalized)}`);
+    const data = await response.json();
 
-      while (i < normalized.length) {
-        const two = normalized.slice(i, i + 2);
-        const one = normalized[i];
-
-        if (multiLetterMap[two]) {
-          output += multiLetterMap[two];
-          i += 2;
-        } else if (singleLetterMap[one]) {
-          output += singleLetterMap[one];
-          i += 1;
-        } else {
-          i += 1;
-        }
-      }
-
-      return output;
+    if (data.hebrew) {
+      return data.hebrew;
     }
+  } catch (error) {
+    console.error('Error calling transliterate API:', error);
+  }
+
+  // Fallback to local transliteration logic
+  let output = '';
+  let i = 0;
+
+  while (i < normalized.length) {
+    const two = normalized.slice(i, i + 2);
+    const one = normalized[i];
+
+    if (multiLetterMap[two]) {
+      output += multiLetterMap[two];
+      i += 2;
+    } else if (singleLetterMap[one]) {
+      output += singleLetterMap[one];
+      i += 1;
+    } else {
+      i += 1;
+    }
+  }
+
+  return output;
+}
 
     function calcularGematria(input) {
       const hebrewText = modo === 'hebreo' ? input.trim() : transliterateToHebrew(input);
