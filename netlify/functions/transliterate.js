@@ -12,26 +12,23 @@ exports.handler = async function(event, context) {
     };
   }
 
-  // Simulated dictionary — you can expand this or connect to a real API later
-  const simulatedDictionary = {
-    "gabriel": "גבריאל",
-    "sara": "שרה",
-    "miguel": "מיגל",
-    "david": "דוד",
-    "elena": "אילנה",
-    "moses": "משה"
-  };
-
   const normalized = name.trim().toLowerCase();
 
-  if (simulatedDictionary[normalized]) {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        hebrew: simulatedDictionary[normalized],
-        source: 'curated'
-      })
-    };
+  try {
+    const sefariaRes = await fetch(`https://www.sefaria.org/api/name/${encodeURIComponent(normalized)}`);
+    const sefariaData = await sefariaRes.json();
+
+    if (sefariaData && sefariaData.he) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          hebrew: sefariaData.he,
+          source: 'sefaria'
+        })
+      };
+    }
+  } catch (error) {
+    console.error('Sefaria API error:', error);
   }
 
   return {
@@ -42,3 +39,4 @@ exports.handler = async function(event, context) {
     })
   };
 };
+
