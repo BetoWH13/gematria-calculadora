@@ -1,5 +1,3 @@
-// /netlify/functions/transliterate.js
-
 const curatedNames = {
   "abraham": { hebrew: "אברהם", meaning: "Padre de multitudes" },
   "sarah": { hebrew: "שרה", meaning: "Princesa" },
@@ -39,7 +37,29 @@ const curatedNames = {
   "neta": { hebrew: "נטע", meaning: "Planta" },
   "amir": { hebrew: "אמיר", meaning: "Cima de un árbol" },
   "ziv": { hebrew: "זיו", meaning: "Brillo" },
-  "tal": { hebrew: "טל", meaning: "Rocío" }
+  "tal": { hebrew: "טל", meaning: "Rocío" },
+  "zipporah": { hebrew: "ציפורה", meaning: "Pájaro" },
+  "boaz": { hebrew: "בעז", meaning: "Con fuerza" },
+  "dinah": { hebrew: "דינה", meaning: "Justicia" },
+  "matan": { hebrew: "מתן", meaning: "Regalo" },
+  "erez": { hebrew: "ארז", meaning: "Cedro" },
+  "ofir": { hebrew: "אופיר", meaning: "Riqueza" },
+  "gal": { hebrew: "גל", meaning: "Ola" },
+  "talia": { hebrew: "טליה", meaning: "Rocío de Dios" },
+  "meir": { hebrew: "מאיר", meaning: "Iluminador" },
+  "hila": { hebrew: "הילה", meaning: "Brillo, aura" },
+  "adiel": { hebrew: "עדיאל", meaning: "Ornamento de Dios" },
+  "aviv": { hebrew: "אביב", meaning: "Primavera" },
+  "gavriel": { hebrew: "גבריאל", meaning: "Dios es mi fuerza" },
+  "yaakov": { hebrew: "יעקב", meaning: "Sujeta el talón" },
+  "tzvi": { hebrew: "צבי", meaning: "Ciervo" },
+  "shlomo": { hebrew: "שלמה", meaning: "Paz" },
+  "chava": { hebrew: "חוה", meaning: "Vida" },
+  "naomi": { hebrew: "נעמי", meaning: "Dulzura, placer" },
+  "eliezer": { hebrew: "אליעזר", meaning: "Dios es mi ayuda" },
+  "yosef": { hebrew: "יוסף", meaning: "Él añadirá" },
+  "dan": { hebrew: "דן", meaning: "Él juzga" },
+  "asher": { hebrew: "אשר", meaning: "Feliz, bendecido" }
 };
 
 exports.handler = async function(event, context) {
