@@ -156,10 +156,10 @@
 }
 
 
-    function mostrarResultado() {
+   async function mostrarResultado() {
   const input = document.getElementById('entrada').value;
   document.getElementById('significado-nombre')?.remove();
-  const resultado = calcularGematria(input);
+  const resultado = await calcularGematria(input);
 
   document.getElementById('resultado-hebreo').innerHTML = `Palabra en hebreo: <span dir="rtl">${resultado.hebrewText}</span>`;
   document.getElementById('resultado-total').textContent = `Valor Total: ${resultado.total}`;
@@ -171,6 +171,8 @@
     fila.innerHTML = `<td>${item.letra}</td><td>${item.valor}</td>`;
     desgloseElemento.appendChild(fila);
   });
+}
+
 }</span>`;
       document.getElementById('resultado-total').textContent = `Valor Total: ${resultado.total}`;
 
