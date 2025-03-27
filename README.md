@@ -9,6 +9,15 @@ Esta es una herramienta educativa que permite calcular el valor numérico (guem�
 2. Haz clic en **Calcular**
 3. Verás la palabra en hebreo, su valor total y un desglose letra por letra
 
+## 📚 Secciones del Sitio
+- **Calculadora**: Herramienta principal para calcular valores de gematría
+- **Blog**: Sección de artículos informativos sobre gematría, su historia y aplicaciones
+
+## 🔧 Estructura del Proyecto
+- `index.html`: Página principal con la calculadora
+- `blog.html`: Página de listado del blog
+- `blog-template.html`: Plantilla para crear nuevos artículos de blog
+
 ## 🕊️ Aviso
 Esta herramienta es solo con fines informativos y educativos. No ofrece interpretaciones religiosas ni predictivas.
 

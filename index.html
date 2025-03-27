@@ -4,127 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora de Gematría Hebrea</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      max-width: 700px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: #f9f9f9;
-      line-height: 1.6;
-    }
-    .input-wrap {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    input[type="text"] {
-      font-size: 1rem;
-      padding: 0.6rem;
-      flex: 1 1 60%;
-      min-width: 200px;
-    }
-    button {
-      font-size: 1rem;
-      padding: 0.6rem 1rem;
-      flex: 1 1 30%;
-      min-width: 100px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background: #e6e6e6;
-    }
-    .results {
-      background: #fff;
-      padding: 1rem;
-      border-radius: 6px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-      animation: fadeIn 0.4s ease-in;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-      text-align: center;
-    }
-    .suggestions {
-      border: 1px solid #ccc;
-      max-height: 150px;
-      overflow-y: auto;
-      background: #fff;
-      position: absolute;
-      width: 90%;
-      left: 5%;
-      z-index: 10;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .suggestion-item {
-      padding: 0.5rem;
-      cursor: pointer;
-    }
-    .suggestion-item:hover {
-      background: #eee;
-    }
-    .meaning-box {
-      margin-top: 1rem;
-      background: #fffbeb;
-      border-left: 4px solid #f0ad4e;
-      padding: 1rem;
-      font-style: italic;
-    }
-    .source-label {
-      font-size: 0.9em;
-      margin-top: 0.5rem;
-      color: #555;
-    }
-    .cta-books {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background: linear-gradient(135deg, #fffbe6, #e0f7fa);
-      border-left: 6px solid #0077cc;
-      border-radius: 8px;
-      font-size: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      animation: pulse 2s infinite ease-in-out;
-    }
-    .cta-books strong {
-      display: block;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      color: #004080;
-    }
-    .cta-books a {
-      color: #0077cc;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .cta-books a:hover {
-      text-decoration: underline;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 5px rgba(0,119,204,0.3); }
-      50% { box-shadow: 0 0 15px rgba(0,119,204,0.6); }
-      100% { box-shadow: 0 0 5px rgba(0,119,204,0.3); }
-    }
-    .disclaimer {
-      font-size: 0.85rem;
-      color: #666;
-      margin-top: 2rem;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Calculadora de Gematría Hebrea</h1>
+  <header>
+    <h1>Calculadora de Gematría Hebrea</h1>
+    <nav>
+      <a href="index.html" class="active">Calculadora</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+  </header>
 
   <div class="input-wrap">
     <input type="text" id="entrada" placeholder="Escribe un nombre o palabra" oninput="mostrarSugerencias()" autocomplete="off">
@@ -146,7 +35,11 @@
   </div>
 
   <div class="cta-books">
-    <script>
+    <strong>📚 ¿Te interesa aprender más sobre Gematría?</strong>
+    Explora <a href="https://www.amazon.com/s?k=libro+de+gematria+hebrea&crid=10WACIXY2R1UD&sprefix=libros+de+gematria%2Caps%2C218&linkCode=ll2&tag=emunabitajon4-20&linkId=23a5201795d52e17fb58e137f6421079&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">libros recomendados en Amazon</a> y profundiza tu conocimiento.
+  </div>
+
+  <script>
 const hebrewGematriaMap = {
   'א': 1, 'ב': 2, 'ג': 3, 'ד': 4, 'ה': 5, 'ו': 6, 'ז': 7, 'ח': 8, 'ט': 9,
   'י': 10, 'כ': 20, 'ך': 20, 'ל': 30, 'מ': 40, 'ם': 40, 'נ': 50, 'ן': 50,
@@ -248,14 +141,6 @@ document.getElementById('entrada').addEventListener('keydown', e => {
   }
 });
 </script>
-
-
-
-    <strong>📚 ¿Te interesa aprender más sobre Gematría?</strong>
-    Explora <a href="https://www.amazon.com/s?k=libro+de+gematria+hebrea&crid=10WACIXY2R1UD&sprefix=libros+de+gematria%2Caps%2C218&linkCode=ll2&tag=emunabitajon4-20&linkId=23a5201795d52e17fb58e137f6421079&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">libros recomendados en Amazon</a> y profundiza tu conocimiento.
-  </div>
-
-  <script>/* FULL JS CODE REPLACED HERE */</script>
 
   <div class="disclaimer">
     🕊️ Esta herramienta tiene fines informativos y educativos. No sustituye consejo espiritual ni religioso. Úsala con respeto y reflexión personal.
