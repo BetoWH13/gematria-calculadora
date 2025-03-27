@@ -88,6 +88,48 @@ nav a.active {
   text-decoration: underline;
 }
 
+/* Pagination styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 0.5rem;
+}
+
+.pagination a, .pagination span {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.pagination a:hover {
+  background: #e6e6e6;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.pagination span.current {
+  background: #0077cc;
+  color: white;
+}
+
+.pagination .disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination .disabled:hover {
+  background: #fff;
+  transform: none;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
 /* Article styles */
 .article-container {
   background: #fff;
@@ -180,6 +222,26 @@ nav a.active {
 
 .article-nav a:hover {
   text-decoration: underline;
+}
+
+/* Home button */
+.home-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #0077cc;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.home-button:hover {
+  text-decoration: underline;
+}
+
+.home-button:before {
+  content: "←";
+  font-size: 1.2em;
 }
 
 /* Placeholder message */
