@@ -1,202 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculadora de Gematría Hebrea</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #f9f9f9;
+    }
+    input, button, select {
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+    }
+    button { cursor: pointer; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .disclaimer, .cta-books {
+      font-size: 0.95em;
+      margin-top: 2rem;
+      color: #444;
+    }
+    .toggle-container {
+      margin: 1rem 0;
+    }
+    .meaning-box {
+      font-style: italic;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Calculadora de Gematría Hebrea</h1>
-    <nav>
-      <a href="index.html" class="active">Calculadora</a>
-      <a href="blog.html">Blog</a>
-    </nav>
-  </header>
+  <h1>Calculadora de Gematría Hebrea</h1>
 
-  <div class="input-wrap">
-    <input type="text" id="entrada" placeholder="Escribe un nombre o palabra" oninput="mostrarSugerencias()" autocomplete="off">
-    <button onclick="mostrarResultado()">Calcular</button>
+  <input type="text" id="entrada" placeholder="Escribe un nombre o palabra" />
+  <button onclick="mostrarResultado()">Calcular</button>
+
+  <div class="toggle-container">
+    <label>
+      <input type="checkbox" id="toggleNikkud" checked />
+      Mostrar vocales (nikkud)
+    </label>
   </div>
 
-  <div id="sugerencias" class="suggestions"></div>
+  <h2 id="resultado-hebreo">Palabra en hebreo: —</h2>
+  <h2 id="resultado-total">Valor Total: —</h2>
 
-  <div class="results">
-    <h2 id="resultado-hebreo">Palabra en hebreo: —</h2>
-    <h2 id="resultado-total">Valor Total: —</h2>
-    <div id="significado-box" class="meaning-box" style="display:none;"></div>
-    <div id="source-label" class="source-label"></div>
+  <div id="significado-box" class="meaning-box" style="display:none;"></div>
+  <div id="source-label" class="source-label"></div>
 
-    <table>
-      <thead><tr><th>Letra</th><th>Valor</th></tr></thead>
-      <tbody id="resultado-desglose"></tbody>
-    </table>
-  </div>
+  <table>
+    <thead><tr><th>Letra</th><th>Valor</th></tr></thead>
+    <tbody id="resultado-desglose"></tbody>
+  </table>
 
   <div class="cta-books">
-    <strong>📚 ¿Te interesa aprender más sobre Gematría?</strong>
-    Explora <a href="https://www.amazon.com/s?k=libro+de+gematria+hebrea&crid=10WACIXY2R1UD&sprefix=libros+de+gematria%2Caps%2C218&linkCode=ll2&tag=emunabitajon4-20&linkId=23a5201795d52e17fb58e137f6421079&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">libros recomendados en Amazon</a> y profundiza tu conocimiento.
+    📚 <strong>¿Te interesa aprender más sobre Gematría?</strong><br>
+    Explora <a href="https://www.amazon.com/s?k=libro+de+gematria+hebrea&crid=10WACIXY2R1UD&sprefix=libros+de+gematria%2Caps%2C218&linkCode=ll2&tag=emunabitajon4-20&linkId=23a5201795d52e17fb58e137f6421079&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">libros recomendados en Amazon</a>.
   </div>
-
-  <script>
-const hebrewGematriaMap = {
-  'א': 1, 'ב': 2, 'ג': 3, 'ד': 4, 'ה': 5, 'ו': 6, 'ז': 7, 'ח': 8, 'ט': 9,
-  'י': 10, 'כ': 20, 'ך': 20, 'ל': 30, 'מ': 40, 'ם': 40, 'נ': 50, 'ן': 50,
-  'ס': 60, 'ע': 70, 'פ': 80, 'ף': 80, 'צ': 90, 'ץ': 90, 'ק': 100,
-  'ר': 200, 'ש': 300, 'ת': 400
-};
-
-const multiLetterMap = {
-  'tz': 'צ', 'sh': 'ש', 'kh': 'ח', 'ch': 'ח', 'th': 'ת',
-  'ph': 'פ', 'aa': 'א', 'oo': 'ו', 'ei': 'ע', 'ai': 'ע', 'ou': 'ו'
-};
-
-const singleLetterMap = {
-  'a': 'א', 'b': 'ב', 'c': 'ק', 'd': 'ד', 'e': 'ע', 'f': 'פ', 'g': 'ג',
-  'h': 'ה', 'i': 'י', 'j': 'י', 'k': 'כ', 'l': 'ל', 'm': 'מ', 'n': 'נ',
-  'o': 'ו', 'p': 'פ', 'q': 'ק', 'r': 'ר', 's': 'ס', 't': 'ת', 'u': 'ו',
-  'v': 'ב', 'w': 'ו', 'x': 'קס', 'y': 'י', 'z': 'ז'
-};
-
-function transliterateLocally(str) {
-  const normalized = str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
-  let output = '', i = 0;
-  while (i < normalized.length) {
-    const two = normalized.slice(i, i + 2);
-    const one = normalized[i];
-    if (multiLetterMap[two]) {
-      output += multiLetterMap[two]; i += 2;
-    } else if (singleLetterMap[one]) {
-      output += singleLetterMap[one]; i += 1;
-    } else {
-      i += 1;
-    }
-  }
-  return output;
-}
-
-async function mostrarResultado() {
-  const input = document.getElementById('entrada').value.trim();
-  if (!input) return;
-  document.getElementById('sugerencias').innerHTML = '';
-
-  const res = await fetch(`/.netlify/functions/transliterate?name=${encodeURIComponent(input)}`);
-  const data = await res.json();
-
-  const hebreo = data.hebrew || transliterateLocally(input);
-  const source = data.source === 'curated' ? '✅ Fuente: Nombre curado' : '🌀 Fuente: Transliteración automática';
-  const significado = data.meaning || null;
-
-  let total = 0;
-  const desglose = [];
-  for (const letra of hebreo) {
-    const valor = hebrewGematriaMap[letra];
-    if (valor) {
-      desglose.push({ letra, valor });
-      total += valor;
-    }
-  }
-
-  document.getElementById('resultado-hebreo').innerHTML = `Palabra en hebreo: <span dir="rtl">${hebreo}</span>`;
-  document.getElementById('resultado-total').textContent = `Valor Total: ${total}`;
-  document.getElementById('significado-box').style.display = significado ? 'block' : 'none';
-  document.getElementById('significado-box').innerHTML = significado ? `✍️ <strong>Significado:</strong> ${significado}` : '';
-  document.getElementById('source-label').textContent = source;
-
-  const tbody = document.getElementById('resultado-desglose');
-  tbody.innerHTML = '';
-  desglose.forEach(item => {
-    const fila = document.createElement('tr');
-    fila.innerHTML = `<td>${item.letra}</td><td>${item.valor}</td>`;
-    tbody.appendChild(fila);
-  });
-}
-
-function mostrarSugerencias() {
-  const val = document.getElementById('entrada').value.trim().toLowerCase();
-  const sugDiv = document.getElementById('sugerencias');
-  sugDiv.innerHTML = '';
-  if (!val) return;
-
-  const nombres = ["abraham", "sarah", "isaac", "jacob", "moses", "aaron", "joseph", "david", "solomon", "ruth", "esther", "miriam", "levi", "benjamin", "daniel", "elijah", "jonah", "noah", "samuel", "nathan", "rebecca", "raquel", "isaiah", "jeremiah", "ezekiel", "job", "shira", "yael", "tamar", "lior", "noa", "eden", "ilan", "ori", "ron", "neta", "amir", "ziv", "tal", "zipporah", "boaz", "dinah", "matan", "erez", "ofir", "gal", "talia", "meir", "hila", "adiel", "aviv", "gavriel", "yaakov", "tzvi", "shlomo", "chava", "naomi", "eliezer", "yosef", "dan", "asher"];
-
-  const resultados = nombres.filter(n => n.startsWith(val)).slice(0, 5);
-  resultados.forEach(nombre => {
-    const item = document.createElement('div');
-    item.className = 'suggestion-item';
-    item.textContent = nombre;
-    item.onclick = () => {
-      document.getElementById('entrada').value = nombre;
-      sugDiv.innerHTML = '';
-      mostrarResultado();
-    };
-    sugDiv.appendChild(item);
-  });
-}
-
-document.getElementById('entrada').addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    async function mostrarResultado() {
-  const input = document.getElementById('entrada').value.trim();
-  if (!input) return;
-  document.getElementById('sugerencias').innerHTML = '';
-
-  try {
-    const res = await fetch(`/.netlify/functions/transliterate?name=${encodeURIComponent(input)}`);
-    const data = await res.json();
-
-    const hebreo = data.hebrew || '—';
-    const source = data.source === 'verified'
-      ? '✅ Fuente: Nombre verificado'
-      : '⚠️ Fuente: Transliteración automática';
-    const significado = data.meaning || null;
-
-    let total = 0;
-    const desglose = [];
-    for (const letra of hebreo) {
-      const valor = hebrewGematriaMap[letra];
-      if (valor) {
-        desglose.push({ letra, valor });
-        total += valor;
-      }
-    }
-
-    document.getElementById('resultado-hebreo').innerHTML = `Palabra en hebreo: <span dir="rtl">${hebreo}</span>`;
-    document.getElementById('resultado-total').textContent = `Valor Total: ${total}`;
-    document.getElementById('significado-box').style.display = significado ? 'block' : 'none';
-    document.getElementById('significado-box').innerHTML = significado ? `✍️ <strong>Significado:</strong> ${significado}` : '';
-    document.getElementById('source-label').textContent = source;
-
-    const tbody = document.getElementById('resultado-desglose');
-    tbody.innerHTML = '';
-    desglose.forEach(item => {
-      const fila = document.createElement('tr');
-      fila.innerHTML = `<td>${item.letra}</td><td>${item.valor}</td>`;
-      tbody.appendChild(fila);
-    });
-  } catch (err) {
-    console.error('Error al obtener transliteración:', err);
-    document.getElementById('resultado-hebreo').textContent = 'Error al obtener el resultado.';
-    document.getElementById('resultado-total').textContent = '';
-    document.getElementById('resultado-desglose').innerHTML = '';
-  }
-}
-
-  }
-});
-</script>
 
   <div class="disclaimer">
     🕊️ Esta herramienta tiene fines informativos y educativos. No sustituye consejo espiritual ni religioso. Úsala con respeto y reflexión personal.
   </div>
 
-  <footer>
-    <p>🕊️ Este sitio tiene fines informativos y educativos. No sustituye consejo espiritual ni religioso.</p>
-    <div class="footer-links">
-      <a href="aviso-legal.html">Aviso Legal</a>
-      <a href="politica-privacidad.html">Política de Privacidad</a>
-    </div>
-  </footer>
+  <script>
+    const hebrewGematriaMap = {
+      'א': 1, 'ב': 2, 'ג': 3, 'ד': 4, 'ה': 5, 'ו': 6, 'ז': 7, 'ח': 8, 'ט': 9,
+      'י': 10, 'כ': 20, 'ך': 20, 'ל': 30, 'מ': 40, 'ם': 40, 'נ': 50, 'ן': 50,
+      'ס': 60, 'ע': 70, 'פ': 80, 'ף': 80, 'צ': 90, 'ץ': 90, 'ק': 100,
+      'ר': 200, 'ש': 300, 'ת': 400
+    };
+
+    async function mostrarResultado() {
+      const input = document.getElementById('entrada').value.trim();
+      if (!input) return;
+
+      const response = await fetch(`/.netlify/functions/transliterate?name=${encodeURIComponent(input)}`);
+      const data = await response.json();
+
+      const showNikkud = document.getElementById('toggleNikkud').checked;
+      const hebreoVisible = showNikkud ? data.hebrewNikkud : data.hebrew;
+
+      document.getElementById('resultado-hebreo').innerHTML = `Palabra en hebreo: <span dir="rtl">${hebreoVisible}</span>`;
+      document.getElementById('resultado-total').textContent = `Valor Total: ${calculateGematria(data.hebrew)}`;
+
+      document.getElementById('significado-box').style.display = data.meaning ? 'block' : 'none';
+      document.getElementById('significado-box').innerHTML = data.meaning ? `✍️ <strong>Significado:</strong> ${data.meaning}` : '';
+      document.getElementById('source-label').textContent = data.source === 'verified' ? '✅ Fuente: Nombre curado' : '🌀 Fuente: Transliteración automática';
+
+      const tbody = document.getElementById('resultado-desglose');
+      tbody.innerHTML = '';
+      for (const letra of data.hebrew) {
+        if (hebrewGematriaMap[letra]) {
+          const fila = document.createElement('tr');
+          fila.innerHTML = `<td>${letra}</td><td>${hebrewGematriaMap[letra]}</td>`;
+          tbody.appendChild(fila);
+        }
+      }
+    }
+
+    function calculateGematria(hebrewText) {
+      let total = 0;
+      for (const letter of hebrewText) {
+        if (hebrewGematriaMap[letter]) {
+          total += hebrewGematriaMap[letter];
+        }
+      }
+      return total;
+    }
+
+    document.getElementById('entrada').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        mostrarResultado();
+      }
+    });
+  </script>
 </body>
 </html>
+
