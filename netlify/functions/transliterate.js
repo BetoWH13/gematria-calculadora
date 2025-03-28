@@ -33,22 +33,15 @@ function normalizeInput(str) {
 
 function applyFinalLetterRules(word) {
   const finalMap = {
-    'כ': 'ך',
-    'מ': 'ם',
-    'נ': 'ן',
-    'פ': 'ף',
-    'צ': 'ץ'
+    'כ': 'ך', 'מ': 'ם', 'נ': 'ן', 'פ': 'ף', 'צ': 'ץ'
   };
   if (word.length === 0) return word;
   const last = word[word.length - 1];
-  if (finalMap[last]) {
-    return word.slice(0, -1) + finalMap[last];
-  }
-  return word;
+  return finalMap[last] ? word.slice(0, -1) + finalMap[last] : word;
 }
 
 function fuzzyMatch(input) {
-  const maxDistance = 2;
+  const maxDistance = 1; // tightened match threshold
 
   function levenshtein(a, b) {
     const matrix = Array.from({ length: b.length + 1 }, (_, i) => [i]);
@@ -71,7 +64,9 @@ function fuzzyMatch(input) {
   let minDist = Infinity;
 
   for (const entry of namesDB) {
-    const dist = levenshtein(normalizeInput(entry.latin), normalized);
+    const normEntry = normalizeInput(entry.latin);
+    if (normEntry === normalized) return entry; // prioritize exact match
+    const dist = levenshtein(normEntry, normalized);
     if (dist <= maxDistance && dist < minDist) {
       closest = entry;
       minDist = dist;
