@@ -1,0 +1,22 @@
+[
+  { "latin": "abraham", "hebrew": "אברהם", "meaning": "Padre de muchos" },
+  { "latin": "adam", "hebrew": "אדם", "meaning": "Hombre, humanidad" },
+  { "latin": "david", "hebrew": "דוד", "meaning": "Amado" },
+  { "latin": "sara", "hebrew": "שרה", "meaning": "Princesa" },
+  { "latin": "gabriel", "hebrew": "גבריאל", "meaning": "Hombre de Dios" },
+  { "latin": "daniel", "hebrew": "דניאל", "meaning": "Dios es mi juez" },
+  { "latin": "miriam", "hebrew": "מרים", "meaning": "Amargura o rebelión" },
+  { "latin": "moshe", "hebrew": "משה", "meaning": "Sacado del agua" },
+  { "latin": "noa", "hebrew": "נעה", "meaning": "Movimiento" },
+  { "latin": "yosef", "hebrew": "יוסף", "meaning": "Él añadirá" },
+  { "latin": "lea", "hebrew": "לאה", "meaning": "Cansada" },
+  { "latin": "yael", "hebrew": "יעל", "meaning": "Cabra montés" },
+  { "latin": "rachel", "hebrew": "רחל", "meaning": "Oveja" },
+  { "latin": "rebecca", "hebrew": "רבקה", "meaning": "Encantadora" },
+  { "latin": "hannah", "hebrew": "חנה", "meaning": "Gracia" },
+  { "latin": "eli", "hebrew": "עלי", "meaning": "Altísimo" },
+  { "latin": "jonatan", "hebrew": "יהונתן", "meaning": "Dios ha dado" },
+  { "latin": "jeshua", "hebrew": "ישוע", "meaning": "Salvación" },
+  { "latin": "isaac", "hebrew": "יצחק", "meaning": "Risa" },
+  { "latin": "shlomo", "hebrew": "שלמה", "meaning": "Paz" }
+]
