@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculadora de Gematría Hebrea</title>
+  <meta name="description" content="Calculadora de gematría hebrea en línea con transliteración precisa y vocales opcionales (nikkud).">
   <style>
     body {
       font-family: sans-serif;
@@ -12,12 +13,14 @@
       padding: 1rem;
       background: #f9f9f9;
     }
-    input, button, select {
+    input, button {
       font-size: 1rem;
       padding: 0.5rem;
       margin: 0.5rem 0;
     }
-    button { cursor: pointer; }
+    button {
+      cursor: pointer;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -40,6 +43,17 @@
       font-style: italic;
       margin-top: 1rem;
     }
+    .result-animate {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .sister-link {
+      margin-top: 2rem;
+      font-size: 0.95em;
+    }
   </style>
 </head>
 <body>
@@ -55,8 +69,8 @@
     </label>
   </div>
 
-  <h2 id="resultado-hebreo">Palabra en hebreo: —</h2>
-  <h2 id="resultado-total">Valor Total: —</h2>
+  <h2 id="resultado-hebreo" class="result-animate">Palabra en hebreo: —</h2>
+  <h2 id="resultado-total" class="result-animate">Valor Total: —</h2>
 
   <div id="significado-box" class="meaning-box" style="display:none;"></div>
   <div id="source-label" class="source-label"></div>
@@ -69,6 +83,10 @@
   <div class="cta-books">
     📚 <strong>¿Te interesa aprender más sobre Gematría?</strong><br>
     Explora <a href="https://www.amazon.com/s?k=libro+de+gematria+hebrea&crid=10WACIXY2R1UD&sprefix=libros+de+gematria%2Caps%2C218&linkCode=ll2&tag=emunabitajon4-20&linkId=23a5201795d52e17fb58e137f6421079&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">libros recomendados en Amazon</a>.
+  </div>
+
+  <div class="sister-link">
+    🔗 ¿Conoces la <strong>numerología caldea</strong>? Visita nuestra <a href="https://numerologiacaldea.netlify.app" target="_blank">calculadora caldea</a>.
   </div>
 
   <div class="disclaimer">
@@ -93,8 +111,10 @@
       const showNikkud = document.getElementById('toggleNikkud').checked;
       const hebreoVisible = showNikkud ? data.hebrewNikkud : data.hebrew;
 
+      document.getElementById('resultado-hebreo').className = 'result-animate';
+      document.getElementById('resultado-total').className = 'result-animate';
       document.getElementById('resultado-hebreo').innerHTML = `Palabra en hebreo: <span dir="rtl">${hebreoVisible}</span>`;
-      document.getElementById('resultado-total').textContent = `Valor Total: ${calculateGematria(data.hebrew)}`;
+      animateCount("resultado-total", calculateGematria(data.hebrew));
 
       document.getElementById('significado-box').style.display = data.meaning ? 'block' : 'none';
       document.getElementById('significado-box').innerHTML = data.meaning ? `✍️ <strong>Significado:</strong> ${data.meaning}` : '';
@@ -111,6 +131,23 @@
       }
     }
 
+    function animateCount(elId, finalValue) {
+      const el = document.getElementById(elId);
+      let count = 0;
+      const duration = 1000;
+      const steps = 30;
+      const stepTime = duration / steps;
+      const increment = finalValue / steps;
+      const interval = setInterval(() => {
+        count += increment;
+        el.textContent = `Valor Total: ${Math.round(count)}`;
+        if (count >= finalValue) {
+          clearInterval(interval);
+          el.textContent = `Valor Total: ${finalValue}`;
+        }
+      }, stepTime);
+    }
+
     function calculateGematria(hebrewText) {
       let total = 0;
       for (const letter of hebrewText) {
@@ -121,12 +158,9 @@
       return total;
     }
 
-    document.getElementById('entrada').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        mostrarResultado();
-      }
-    });
+    window.onload = () => {
+      document.getElementById("entrada").focus();
+    };
   </script>
 </body>
 </html>
-
