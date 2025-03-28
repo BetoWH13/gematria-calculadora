@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-<head> 
-  <meta name="google-site-verification" content="6iMEJTeq8aWSZIkLA6N-U0p6G2UEiXnAUeQNQc71LGY" />
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculadora de Gematría Hebrea</title>
   <meta name="description" content="Calculadora de gematría hebrea en línea con transliteración precisa y vocales opcionales (nikkud).">
+  <meta name="google-site-verification" content="6iMEJTeq8aWSZIkLA6N-U0p6G2UEiXnAUeQNQc71LGY" />
   <style>
     body {
       font-family: sans-serif;
@@ -51,6 +51,23 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    nav {
+      margin-bottom: 1rem;
+    }
+    nav a {
+      margin-right: 1rem;
+      text-decoration: none;
+      color: #333;
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9em;
+      color: #666;
+    }
+    footer a {
+      color: #666;
+      margin: 0 0.5rem;
+    }
     .sister-link {
       margin-top: 2rem;
       font-size: 0.95em;
@@ -59,6 +76,11 @@
 </head>
 <body>
   <h1>Calculadora de Gematría Hebrea</h1>
+
+  <nav>
+    <a href="index.html">🏠 Calculadora</a>
+    <a href="blog.html">📝 Blog</a>
+  </nav>
 
   <input type="text" id="entrada" placeholder="Escribe un nombre o palabra" />
   <button onclick="mostrarResultado()">Calcular</button>
@@ -93,6 +115,14 @@
   <div class="disclaimer">
     🕊️ Esta herramienta tiene fines informativos y educativos. No sustituye consejo espiritual ni religioso. Úsala con respeto y reflexión personal.
   </div>
+
+  <footer>
+    <p>🕊️ Este sitio tiene fines informativos y educativos. No sustituye consejo espiritual ni religioso.</p>
+    <p>
+      <a href="aviso-legal.html">Aviso Legal</a> |
+      <a href="politica-privacidad.html">Política de Privacidad</a>
+    </p>
+  </footer>
 
   <script>
     const hebrewGematriaMap = {
