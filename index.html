@@ -137,7 +137,52 @@ function mostrarSugerencias() {
 
 document.getElementById('entrada').addEventListener('keydown', e => {
   if (e.key === 'Enter') {
-    mostrarResultado();
+    async function mostrarResultado() {
+  const input = document.getElementById('entrada').value.trim();
+  if (!input) return;
+  document.getElementById('sugerencias').innerHTML = '';
+
+  try {
+    const res = await fetch(`/.netlify/functions/transliterate?name=${encodeURIComponent(input)}`);
+    const data = await res.json();
+
+    const hebreo = data.hebrew || '—';
+    const source = data.source === 'verified'
+      ? '✅ Fuente: Nombre verificado'
+      : '⚠️ Fuente: Transliteración automática';
+    const significado = data.meaning || null;
+
+    let total = 0;
+    const desglose = [];
+    for (const letra of hebreo) {
+      const valor = hebrewGematriaMap[letra];
+      if (valor) {
+        desglose.push({ letra, valor });
+        total += valor;
+      }
+    }
+
+    document.getElementById('resultado-hebreo').innerHTML = `Palabra en hebreo: <span dir="rtl">${hebreo}</span>`;
+    document.getElementById('resultado-total').textContent = `Valor Total: ${total}`;
+    document.getElementById('significado-box').style.display = significado ? 'block' : 'none';
+    document.getElementById('significado-box').innerHTML = significado ? `✍️ <strong>Significado:</strong> ${significado}` : '';
+    document.getElementById('source-label').textContent = source;
+
+    const tbody = document.getElementById('resultado-desglose');
+    tbody.innerHTML = '';
+    desglose.forEach(item => {
+      const fila = document.createElement('tr');
+      fila.innerHTML = `<td>${item.letra}</td><td>${item.valor}</td>`;
+      tbody.appendChild(fila);
+    });
+  } catch (err) {
+    console.error('Error al obtener transliteración:', err);
+    document.getElementById('resultado-hebreo').textContent = 'Error al obtener el resultado.';
+    document.getElementById('resultado-total').textContent = '';
+    document.getElementById('resultado-desglose').innerHTML = '';
+  }
+}
+
   }
 });
 </script>
