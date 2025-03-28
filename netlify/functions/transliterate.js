@@ -9,11 +9,11 @@ try {
   const dbPath = path.resolve(__dirname, 'names-db.json');
   const raw = fs.readFileSync(dbPath, 'utf-8');
   namesDB = JSON.parse(raw);
+  console.log("✅ Loaded", namesDB.length, "names into the transliteration engine.");
 } catch (err) {
-  console.error('Error loading names DB:', err);
+  console.error('❌ Error loading names DB:', err);
 }
 
-// Local fallback maps (same as before)
 const multiLetterMap = {
   'tz': 'צ', 'sh': 'ש', 'kh': 'ח', 'ch': 'ח', 'th': 'ת',
   'ph': 'פ', 'aa': 'א', 'oo': 'ו', 'ei': 'ע', 'ai': 'ע', 'ou': 'ו'
@@ -33,8 +33,8 @@ function normalizeInput(str) {
 
 async function transliterateToHebrew(input) {
   const normalized = normalizeInput(input);
+  console.log("🔍 Looking up:", normalized);
 
-  // Try to find in verified list
   const match = namesDB.find(entry => normalizeInput(entry.latin) === normalized);
   if (match) {
     return {
@@ -44,7 +44,6 @@ async function transliterateToHebrew(input) {
     };
   }
 
-  // Fallback to local rules
   let hebrewFallback = '';
   let i = 0;
   while (i < normalized.length) {
@@ -69,5 +68,15 @@ async function transliterateToHebrew(input) {
   };
 }
 
-export { transliterateToHebrew };
+export async function handler(event) {
+  const name = event.queryStringParameters.name || '';
+  console.log("🚀 API call received:", name);
 
+  const result = await transliterateToHebrew(name);
+  return {
+    statusCode: 200,
+    body: JSON.stringify(result)
+  };
+}
+
+export { transliterateToHebrew };
