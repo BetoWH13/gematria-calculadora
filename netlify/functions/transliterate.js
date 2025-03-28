@@ -1,12 +1,17 @@
 // transliterate.js
 
+import fs from 'fs';
+import path from 'path';
+
 let namesDB = [];
 
-// Load names database once on startup
-fetch('names-db.json')
-  .then(res => res.json())
-  .then(data => { namesDB = data; })
-  .catch(err => console.error('Error loading names DB:', err));
+try {
+  const dbPath = path.resolve(__dirname, 'names-db.json');
+  const raw = fs.readFileSync(dbPath, 'utf-8');
+  namesDB = JSON.parse(raw);
+} catch (err) {
+  console.error('Error loading names DB:', err);
+}
 
 // Local fallback maps (same as before)
 const multiLetterMap = {
@@ -65,3 +70,4 @@ async function transliterateToHebrew(input) {
 }
 
 export { transliterateToHebrew };
+
