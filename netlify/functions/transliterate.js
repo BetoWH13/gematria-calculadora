@@ -31,6 +31,22 @@ function normalizeInput(str) {
   return str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
 }
 
+function applyFinalLetterRules(word) {
+  const finalMap = {
+    'כ': 'ך',
+    'מ': 'ם',
+    'נ': 'ן',
+    'פ': 'ף',
+    'צ': 'ץ'
+  };
+  if (word.length === 0) return word;
+  const last = word[word.length - 1];
+  if (finalMap[last]) {
+    return word.slice(0, -1) + finalMap[last];
+  }
+  return word;
+}
+
 async function transliterateToHebrew(input) {
   const normalized = normalizeInput(input);
   console.log("🔍 Looking up:", normalized);
@@ -60,6 +76,8 @@ async function transliterateToHebrew(input) {
       i += 1;
     }
   }
+
+  hebrewFallback = applyFinalLetterRules(hebrewFallback);
 
   return {
     hebrew: hebrewFallback,
