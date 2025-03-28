@@ -92,6 +92,7 @@ async function transliterateToHebrew(input) {
   if (match) {
     return {
       hebrew: match.hebrew,
+      hebrewNikkud: match.hebrewNikkud || match.hebrew,
       meaning: match.meaning,
       source: 'verified'
     };
@@ -118,6 +119,7 @@ async function transliterateToHebrew(input) {
 
   return {
     hebrew: hebrewFallback,
+    hebrewNikkud: hebrewFallback,
     meaning: null,
     source: 'fallback'
   };
