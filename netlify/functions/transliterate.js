@@ -1,5 +1,4 @@
 // transliterate.js
-
 import fs from 'fs';
 import path from 'path';
 
@@ -14,10 +13,49 @@ try {
   console.error('❌ Error loading names DB:', err);
 }
 
+// Normalize input for consistent matching
 function normalizeInput(str) {
   return str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
 }
 
+// Basic Levenshtein distance function
+function levenshtein(a, b) {
+  const matrix = Array.from({ length: b.length + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= a.length; j++) matrix[0][j] = j;
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      const cost = a[j - 1] === b[i - 1] ? 0 : 1;
+      matrix[i][j] = Math.min(
+        matrix[i - 1][j] + 1,
+        matrix[i][j - 1] + 1,
+        matrix[i - 1][j - 1] + cost
+      );
+    }
+  }
+
+  return matrix[b.length][a.length];
+}
+
+// Suggest closest known name by Latin key
+function suggestClosestName(input) {
+  const normalized = normalizeInput(input);
+  let closest = null;
+  let minDist = Infinity;
+
+  for (const entry of namesDB) {
+    const normEntry = normalizeInput(entry.latin);
+    const dist = levenshtein(normEntry, normalized);
+    if (dist < minDist) {
+      closest = entry;
+      minDist = dist;
+    }
+  }
+
+  return minDist <= 2 ? closest.latin : null;
+}
+
+// Main logic
 async function transliterateToHebrew(input) {
   const normalized = normalizeInput(input);
   console.log("🔍 Looking up:", normalized);
@@ -33,12 +71,17 @@ async function transliterateToHebrew(input) {
     };
   }
 
+  const suggestion = suggestClosestName(normalized);
+
   return {
-    error: 'Nombre no reconocido. Por favor, verifica la ortografía.',
+    error: suggestion
+      ? `Nombre no reconocido. ¿Quisiste decir "${suggestion}"?`
+      : 'Nombre no reconocido. Por favor, verifica la ortografía.',
     source: 'unverified'
   };
 }
 
+// Netlify Function Handler
 export async function handler(event) {
   const name = event.queryStringParameters.name || '';
   console.log("🚀 API call received:", name);
@@ -50,5 +93,7 @@ export async function handler(event) {
   };
 }
 
+// Also export core for local testing
 export { transliterateToHebrew };
+
 
