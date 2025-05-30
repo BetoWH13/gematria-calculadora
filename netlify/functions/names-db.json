@@ -1,4 +1,4 @@
-[
+[[
   {
     "latin": "abraham",
     "hebrew": "אברהם",
@@ -24,88 +24,16 @@
     "meaning": "Amado"
   },
   {
-    "latin": "rachel",
-    "hebrew": "רחל",
-    "hebrewNikkud": "רָחֵל",
-    "meaning": "Oveja"
-  },
-  {
     "latin": "isaac",
     "hebrew": "יצחק",
     "hebrewNikkud": "יִצְחָק",
     "meaning": "Él reirá"
   },
   {
-    "latin": "rebecca",
-    "hebrew": "רבקה",
-    "hebrewNikkud": "רִבְקָה",
-    "meaning": "Lazo"
-  },
-  {
-    "latin": "elijah",
-    "hebrew": "אליהו",
-    "hebrewNikkud": "אֵלִיָּהוּ",
-    "meaning": "Mi Dios es Yahweh"
-  },
-  {
-    "latin": "daniel",
-    "hebrew": "דניאל",
-    "hebrewNikkud": "דָּנִיֵּאל",
-    "meaning": "Dios es mi juez"
-  },
-  {
-    "latin": "noah",
-    "hebrew": "נח",
-    "hebrewNikkud": "נֹחַ",
-    "meaning": "Descanso"
-  },
-  {
-    "latin": "adam",
-    "hebrew": "אדם",
-    "hebrewNikkud": "אָדָם",
-    "meaning": "Hombre, tierra roja"
-  },
-  {
-    "latin": "eve",
-    "hebrew": "חוה",
-    "hebrewNikkud": "חַוָּה",
-    "meaning": "Madre de todos los vivientes"
-  },
-  {
-    "latin": "aaron",
-    "hebrew": "אהרן",
-    "hebrewNikkud": "אַהֲרֹן",
-    "meaning": "Portador de luz"
-  },
-  {
-    "latin": "levi",
-    "hebrew": "לוי",
-    "hebrewNikkud": "לֵוִי",
-    "meaning": "Unido"
-  },
-  {
-    "latin": "samuel",
-    "hebrew": "שמואל",
-    "hebrewNikkud": "שְׁמוּאֵל",
-    "meaning": "Dios ha escuchado"
-  },
-  {
-    "latin": "isaiah",
-    "hebrew": "ישעיהו",
-    "hebrewNikkud": "יְשַׁעְיָהוּ",
-    "meaning": "Dios es salvación"
-  },
-  {
-    "latin": "ezekiel",
-    "hebrew": "יחזקאל",
-    "hebrewNikkud": "יְחֶזְקֵאל",
-    "meaning": "Dios fortalece"
-  },
-  {
-    "latin": "job",
-    "hebrew": "איוב",
-    "hebrewNikkud": "אִיּוֹב",
-    "meaning": "Perseguido"
+    "latin": "jacob",
+    "hebrew": "יעקב",
+    "hebrewNikkud": "יַעֲקֹב",
+    "meaning": "Sostenido por el talón"
   },
   {
     "latin": "judah",
@@ -114,88 +42,106 @@
     "meaning": "Alabanza"
   },
   {
-    "latin": "jesse",
-    "hebrew": "ישי",
-    "hebrewNikkud": "יִשַׁי",
-    "meaning": "Regalo"
+    "latin": "dan",
+    "hebrew": "דן",
+    "hebrewNikkud": "דָּן",
+    "meaning": "Juez"
   },
   {
-    "latin": "tamar",
-    "hebrew": "תמר",
-    "hebrewNikkud": "תָּמָר",
-    "meaning": "Palmera"
+    "latin": "levi",
+    "hebrew": "לוי",
+    "hebrewNikkud": "לֵוִי",
+    "meaning": "Unido"
   },
   {
-    "latin": "miriam",
-    "hebrew": "מרים",
-    "hebrewNikkud": "מִרְיָם",
-    "meaning": "Amargura o elevación"
+    "latin": "benjamin",
+    "hebrew": "בנימין",
+    "hebrewNikkud": "בִּנְיָמִין",
+    "meaning": "Hijo de la mano derecha"
   },
   {
-    "latin": "hana",
-    "hebrew": "חנה",
-    "hebrewNikkud": "חַנָּה",
-    "meaning": "Gracia"
+    "latin": "reuben",
+    "hebrew": "ראובן",
+    "hebrewNikkud": "רְאוּבֵן",
+    "meaning": "He aquí un hijo"
   },
   {
-    "latin": "hannah",
-    "hebrew": "חנה",
-    "hebrewNikkud": "חַנָּה",
-    "meaning": "Gracia"
+    "latin": "joseph",
+    "hebrew": "יוסף",
+    "hebrewNikkud": "יוֹסֵף",
+    "meaning": "Él añadirá"
   },
   {
-    "latin": "nathan",
-    "hebrew": "נתן",
-    "hebrewNikkud": "נָתָן",
-    "meaning": "Él dio"
+    "latin": "naphtali",
+    "hebrew": "נפתלי",
+    "hebrewNikkud": "נַפְתָּלִי",
+    "meaning": "Mi lucha"
   },
   {
-    "latin": "joel",
-    "hebrew": "יואל",
-    "hebrewNikkud": "יוֹאֵל",
-    "meaning": "Yahweh es Dios"
+    "latin": "asher",
+    "hebrew": "אשר",
+    "hebrewNikkud": "אָשֵׁר",
+    "meaning": "Feliz"
   },
   {
-    "latin": "eliezer",
-    "hebrew": "אליעזר",
-    "hebrewNikkud": "אֱלִיעֶזֶר",
-    "meaning": "Mi Dios es ayuda"
+    "latin": "zebulun",
+    "hebrew": "זבולון",
+    "hebrewNikkud": "זְבוּלוּן",
+    "meaning": "Morada"
   },
   {
-    "latin": "asa",
-    "hebrew": "אסא",
-    "hebrewNikkud": "אָסָא",
-    "meaning": "Curador"
+    "latin": "gad",
+    "hebrew": "גד",
+    "hebrewNikkud": "גָּד",
+    "meaning": "Fortuna"
   },
   {
-    "latin": "abigail",
-    "hebrew": "אביגיל",
-    "hebrewNikkud": "אֲבִיגַיִל",
-    "meaning": "Alegría del padre"
+    "latin": "issachar",
+    "hebrew": "יששכר",
+    "hebrewNikkud": "יִשָּׂשכָר",
+    "meaning": "Recompensa"
   },
   {
-    "latin": "baruch",
-    "hebrew": "ברוך",
-    "hebrewNikkud": "בָּרוּךְ",
-    "meaning": "Bendito"
+    "latin": "manasseh",
+    "hebrew": "מנשה",
+    "hebrewNikkud": "מְנַשֶּׁה",
+    "meaning": "Olvido"
   },
   {
-    "latin": "matthew",
-    "hebrew": "מתתיהו",
-    "hebrewNikkud": "מַתִּתְיָהוּ",
-    "meaning": "Regalo de Dios"
+    "latin": "ephraim",
+    "hebrew": "אפרים",
+    "hebrewNikkud": "אֶפְרַיִם",
+    "meaning": "Fructífero"
   },
   {
-    "latin": "jonathan",
-    "hebrew": "יהונתן",
-    "hebrewNikkud": "יוֹנָתָן",
-    "meaning": "Dios ha dado"
+    "latin": "simeon",
+    "hebrew": "שמעון",
+    "hebrewNikkud": "שִׁמְעוֹן",
+    "meaning": "Escuchado"
   },
   {
-    "latin": "zion",
-    "hebrew": "ציון",
-    "hebrewNikkud": "צִיּוֹן",
-    "meaning": "Fortaleza"
+    "latin": "aaron",
+    "hebrew": "אהרן",
+    "hebrewNikkud": "אַהֲרֹן",
+    "meaning": "Portador de luz"
+  },
+  {
+    "latin": "elijah",
+    "hebrew": "אליהו",
+    "hebrewNikkud": "אֵלִיָּהוּ",
+    "meaning": "Mi Dios es Yahweh"
+  },
+  {
+    "latin": "samuel",
+    "hebrew": "שמואל",
+    "hebrewNikkud": "שְׁמוּאֵל",
+    "meaning": "Dios ha escuchado"
+  },
+  {
+    "latin": "jonah",
+    "hebrew": "יונה",
+    "hebrewNikkud": "יוֹנָה",
+    "meaning": "Paloma"
   },
   {
     "latin": "ezra",
@@ -204,105 +150,148 @@
     "meaning": "Ayuda"
   },
   {
-    "latin": "ruth",
-    "hebrew": "רות",
-    "hebrewNikkud": "רוּת",
-    "meaning": "Amistad"
+    "latin": "rachel",
+    "hebrew": "רחל",
+    "hebrewNikkud": "רָחֵל",
+    "meaning": "Oveja"
   },
   {
-    "latin": "michael",
-    "hebrew": "מיכאל",
-    "hebrewNikkud": "מִיכָאֵל",
-    "meaning": "¿Quién como Dios?"
+    "latin": "leah",
+    "hebrew": "לאה",
+    "hebrewNikkud": "לֵאָה",
+    "meaning": "Fatigada"
   },
   {
-    "latin": "gabriel",
-    "hebrew": "גבריאל",
-    "hebrewNikkud": "גַּבְרִיאֵל",
-    "meaning": "Fuerza de Dios"
+    "latin": "miriam",
+    "hebrew": "מרים",
+    "hebrewNikkud": "מִרְיָם",
+    "meaning": "Amargura o elevación"
   },
   {
-    "latin": "shoshana",
-    "hebrew": "שושנה",
-    "hebrewNikkud": "שׁוֹשַׁנָּה",
-    "meaning": "Lirio"
+    "latin": "hannah",
+    "hebrew": "חנה",
+    "hebrewNikkud": "חַנָּה",
+    "meaning": "Gracia"
   },
   {
-    "latin": "orly",
-    "hebrew": "אורלי",
-    "hebrewNikkud": "אוֹרְלִי",
-    "meaning": "Mi luz"
+    "latin": "tamar",
+    "hebrew": "תמר",
+    "hebrewNikkud": "תָּמָר",
+    "meaning": "Palmera"
   },
   {
-    "latin": "tova",
-    "hebrew": "טובה",
-    "hebrewNikkud": "טוֹבָה",
-    "meaning": "Buena"
+    "latin": "deborah",
+    "hebrew": "דבורה",
+    "hebrewNikkud": "דְּבוֹרָה",
+    "meaning": "Abeja"
   },
   {
-    "latin": "yoel",
-    "hebrew": "יואל",
-    "hebrewNikkud": "יוֹאֵל",
-    "meaning": "Yahweh es Dios"
+    "latin": "abigail",
+    "hebrew": "אביגיל",
+    "hebrewNikkud": "אֲבִיגַיִל",
+    "meaning": "Alegría del padre"
+  },
+  {
+    "latin": "hulda",
+    "hebrew": "חולדה",
+    "hebrewNikkud": "חֻלְדָּה",
+    "meaning": "Comadreja"
   },
   {
     "latin": "zipporah",
     "hebrew": "ציפורה",
     "hebrewNikkud": "צִפּוֹרָה",
-    "meaning": "Ave"
+    "meaning": "Pajarito"
   },
   {
-    "latin": "gil",
-    "hebrew": "גיל",
-    "hebrewNikkud": "גִּיל",
-    "meaning": "Alegría"
+    "latin": "naomi",
+    "hebrew": "נעמי",
+    "hebrewNikkud": "נָעֳמִי",
+    "meaning": "Placentera"
   },
   {
-    "latin": "tamir",
-    "hebrew": "תמיר",
-    "hebrewNikkud": "תָּמִיר",
-    "meaning": "Alto, elegante"
+    "latin": "isaiah",
+    "hebrew": "ישעיהו",
+    "hebrewNikkud": "יְשַׁעְיָהוּ",
+    "meaning": "Dios es salvación"
   },
   {
-    "latin": "lior",
-    "hebrew": "ליאור",
-    "hebrewNikkud": "לִיאוֹר",
-    "meaning": "Mi luz"
+    "latin": "jeremiah",
+    "hebrew": "ירמיהו",
+    "hebrewNikkud": "יִרְמְיָהוּ",
+    "meaning": "Dios exalta"
   },
   {
-    "latin": "yael",
-    "hebrew": "יעל",
-    "hebrewNikkud": "יָעֵל",
-    "meaning": "Cabra montés"
+    "latin": "ezekiel",
+    "hebrew": "יחזקאל",
+    "hebrewNikkud": "יְחֶזְקֵאל",
+    "meaning": "Dios fortalece"
   },
   {
-    "latin": "ron",
-    "hebrew": "רון",
-    "hebrewNikkud": "רוֹן",
-    "meaning": "Cántico, alegría"
+    "latin": "daniel",
+    "hebrew": "דניאל",
+    "hebrewNikkud": "דָּנִיֵּאל",
+    "meaning": "Dios es mi juez"
   },
   {
-    "latin": "noa",
-    "hebrew": "נועה",
-    "hebrewNikkud": "נֹעָה",
-    "meaning": "Movimiento"
+    "latin": "joel",
+    "hebrew": "יואל",
+    "hebrewNikkud": "יוֹאֵל",
+    "meaning": "Yahweh es Dios"
   },
   {
-    "latin": "amir",
-    "hebrew": "אמיר",
-    "hebrewNikkud": "אָמִיר",
-    "meaning": "Cima, rama"
+    "latin": "amos",
+    "hebrew": "עמוס",
+    "hebrewNikkud": "עָמוֹס",
+    "meaning": "Carga"
   },
   {
-    "latin": "ziv",
-    "hebrew": "זיו",
-    "hebrewNikkud": "זִיו",
-    "meaning": "Brillo, esplendor"
+    "latin": "obadiah",
+    "hebrew": "עובדיה",
+    "hebrewNikkud": "עֹבַדְיָה",
+    "meaning": "Siervo de Yahweh"
   },
   {
-    "latin": "neta",
-    "hebrew": "נטע",
-    "hebrewNikkud": "נֶטַע",
-    "meaning": "Planta"
+    "latin": "micah",
+    "hebrew": "מיכה",
+    "hebrewNikkud": "מִיכָה",
+    "meaning": "¿Quién como Dios?"
+  },
+  {
+    "latin": "nahum",
+    "hebrew": "נחום",
+    "hebrewNikkud": "נַחוּם",
+    "meaning": "Compasivo"
+  },
+  {
+    "latin": "habakkuk",
+    "hebrew": "חבקוק",
+    "hebrewNikkud": "חֲבַקּוּק",
+    "meaning": "Abrazo"
+  },
+  {
+    "latin": "zephaniah",
+    "hebrew": "צפניה",
+    "hebrewNikkud": "צְפַנְיָה",
+    "meaning": "Yahweh ha escondido"
+  },
+  {
+    "latin": "haggai",
+    "hebrew": "חגי",
+    "hebrewNikkud": "חַגַּי",
+    "meaning": "Mi festividad"
+  },
+  {
+    "latin": "zechariah",
+    "hebrew": "זכריה",
+    "hebrewNikkud": "זְכַרְיָה",
+    "meaning": "Yahweh ha recordado"
+  },
+  {
+    "latin": "malachi",
+    "hebrew": "מלאכי",
+    "hebrewNikkud": "מַלְאָכִי",
+    "meaning": "Mi mensajero"
   }
 ]
+
