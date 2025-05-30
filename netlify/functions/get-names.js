@@ -1,13 +1,11 @@
-// get-names.js
-import names from './names-db.json';
+export async function handler(event) {
+  const name = event.queryStringParameters.name || '';
+  const fallbackParam = event.queryStringParameters.fallback === 'true';
+  console.log("🚀 API call received:", name, "| fallback allowed:", fallbackParam);
 
-export async function handler(event, context) {
+  const result = await transliterateToHebrew(name, fallbackParam);
   return {
     statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*', // for local testing
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(names)
+    body: JSON.stringify(result)
   };
 }
